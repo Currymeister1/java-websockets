@@ -47,10 +47,26 @@ public class Server {
             out.println("Hello! Pick a number between 1 and 100." );
 
             while((inputLine = in.readLine()) != null){
+
+                if(inputLine.equals("Bye")){
+                    break;
+                }
+                if(inputLine.equals("y")){
+                    guessNumberProtocol = new GuessNumberProtocol();
+                    out.println("Pick a number between 1 and 100");
+                    continue;
+                }
+
                 System.out.println("Client: "+ inputLine);
                 outputLine = guessNumberProtocol.processInput(inputLine);
 
-                out.println(outputLine);
+                if(outputLine.substring(0,4).equals("Won!")){
+                    out.println(outputLine+ " Press y to replay or write Bye to exit");
+                }
+                else{
+                    out.println(outputLine);
+                }
+
 
             }
 

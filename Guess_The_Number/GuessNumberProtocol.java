@@ -16,20 +16,21 @@ public class GuessNumberProtocol {
     public String processInput(String input){
         String output = null;
 
+        try {
+            int guessedNumber = Integer.parseInt(input);
+            System.out.println(guessedNumber);
+            if (guessedNumber == numberToGuess) {
+                output = "Won! You guessed the number! It was " + numberToGuess;
+            } else if (guessedNumber > numberToGuess) {
+                output = "Lower";
+            } else {
+                output = "Higher";
+            }
 
-        int guessedNumber = Integer.parseInt(input);
-        System.out.println(guessedNumber);
-        if(guessedNumber == numberToGuess){
-            output = "Won! You guessed the number! It was " + numberToGuess;
-        } else if (guessedNumber > numberToGuess) {
-            output = "Lower";
+            return output;
+        } catch (NumberFormatException e){
+            return "Please type a number!";
         }
-        else{
-            output = "Higher";
-        }
-
-        return output;
-
 
     }
 

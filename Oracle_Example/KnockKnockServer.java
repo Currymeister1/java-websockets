@@ -1,3 +1,5 @@
+package Oracle_Example;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,11 +27,14 @@ public class KnockKnockServer {
 
 
             while((inputLine = in.readLine())!=null){
+
                 outputLine = kkp.processInput(inputLine);
                 out.println(outputLine);
                 if(outputLine.equals("Bye!"))
                     break;
 
+                System.out.println("Client: "+inputLine);
+                System.out.println("Server: "+ outputLine);
             }
         } catch (IOException e){
             System.out.println("Exception caught when trying to listen");

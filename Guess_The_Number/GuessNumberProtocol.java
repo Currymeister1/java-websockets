@@ -2,7 +2,7 @@ package Guess_The_Number;
 
 import java.util.Random;
 
-public class GuessNumberProtocol {
+public class GuessNumberProtocol{
 
     private int round = 0;
 
@@ -33,6 +33,7 @@ public class GuessNumberProtocol {
         }
 
     }
+
 
 
 }

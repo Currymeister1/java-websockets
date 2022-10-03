@@ -32,52 +32,22 @@ import java.net.Socket;
 
 public class Server {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int portNumber = 1234;
-
-        try(
+        boolean listening = true;
+        try (
                 ServerSocket serverSocket = new ServerSocket(portNumber);
-                Socket clientSocket = serverSocket.accept();
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        )
-        {
-            String inputLine, outputLine;
-            GuessNumberProtocol guessNumberProtocol = new GuessNumberProtocol();
-            out.println("Hello! Pick a number between 1 and 100." );
 
-            while((inputLine = in.readLine()) != null){
-
-                if(inputLine.equals("Bye")){
-                    break;
-                }
-                if(inputLine.equals("y")){
-                    guessNumberProtocol = new GuessNumberProtocol();
-                    out.println("Pick a number between 1 and 100");
-                    continue;
-                }
-
-                System.out.println("Client: "+ inputLine);
-                outputLine = guessNumberProtocol.processInput(inputLine);
-
-                if(outputLine.substring(0,4).equals("Won!")){
-                    out.println(outputLine+ " Press y to replay or write Bye to exit");
-                }
-                else{
-                    out.println(outputLine);
-                }
-
-
+        ) {
+            while(listening){
+                new ServerThread( serverSocket.accept()).start();
             }
-
 
         }catch (IOException e){
             e.printStackTrace();
         }
 
     }
-
-
 }
 
 
